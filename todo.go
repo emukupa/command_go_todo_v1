@@ -76,3 +76,19 @@ func (t *Todos) Load(filename string) (bool, error) {
 
 	return true, nil
 }
+
+func (t *Todos) Save(filename string) (bool, error) {
+	data, err := json.Marshal(t)
+	if err != nil {
+		return false, err
+	}
+
+	// write to the file
+	err = ioutil.WriteFile(filename, data, 0644)
+
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
