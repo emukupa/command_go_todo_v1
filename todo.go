@@ -38,3 +38,15 @@ func (t *Todos) Complete(index int) (bool, error) {
 
 	return true, nil
 }
+
+func (t *Todos) Delete(index int) (bool, error) {
+	ls := *t
+
+	if index <= 0 || index >= len(ls) {
+		return false, fmt.Errorf("out of bound index (%d)", index)
+	}
+
+	// delete task, everything except the index
+	*t = append(ls[:index], ls[index+1:]...)
+	return true, nil
+}
