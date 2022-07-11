@@ -10,3 +10,14 @@ type item struct {
 }
 
 type Todos []item
+
+func (t *Todos) Add(task string) {
+	todo := item{
+		Task:       task,
+		Done:       false,
+		CreatedAt:  time.Now(),
+		CompleteAt: time.Time{},
+	}
+
+	*t = append(*t, todo)
+}
